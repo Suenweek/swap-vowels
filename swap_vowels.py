@@ -6,11 +6,11 @@ from itertools import groupby, chain
 VOWELS = set('aeiouy')
 
 
-def is_vowel(letter):
+def vowel(letter):
     return letter.lower() in VOWELS
 
 
-def negated(func):
+def inverted(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         return not func(*args, **kwargs)
@@ -28,11 +28,11 @@ class SwapVowels(object):
 
         while i < j:
 
-            if not is_vowel(array[i]):
+            if not vowel(array[i]):
                 i += 1
                 continue
 
-            if not is_vowel(array[j]):
+            if not vowel(array[j]):
                 j -= 1
                 continue
 
@@ -53,8 +53,8 @@ class SwapVowels(object):
                         itemgetter(0),
                         chain.from_iterable(
                             zip(
-                                groupby(string, negated(is_vowel)),
-                                groupby(reversed(string), is_vowel)
+                                groupby(string, inverted(vowel)),
+                                groupby(reversed(string), vowel)
                             )
                         )
                     )
