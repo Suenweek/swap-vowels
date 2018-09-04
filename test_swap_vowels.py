@@ -11,11 +11,11 @@ from swap_vowels import SwapVowels
     ('linux', 'lunix'),              # Odd lenght
     ('manjaro', 'monjara'),          # Even lenght
     ('kilimanjaro', 'kolamanjiri'),  # Multi-syllable
-    ('Ansible', 'ensiblA')           # Upper case
+    ('Achilles', 'echillAs')         # Upper case
 ])
 @pytest.mark.parametrize('swap_vowels', [
     SwapVowels.in_procedural_style,
     SwapVowels.in_functional_style
 ])
 def test_swap_vowels(swap_vowels, str_in, str_out):
-    assert swap_vowels(str_in) == str_out
+    assert str_out == swap_vowels(str_in)
