@@ -32,9 +32,25 @@ class SwapVowels(object):
         return ''.join(array)
 
     @staticmethod
-    def in_functional_style(string):
+    def in_iterative_style(string):
         reversed_vowels = filter(vowel, reversed(string))
         return ''.join(
             next(reversed_vowels) if vowel(letter) else letter
             for letter in string
         )
+
+    @staticmethod
+    def in_purely_functional_style(string):
+        def join(cs, vs):
+            if not cs:
+                return vs
+
+            if not vs:
+                return cs
+
+            if vowel(cs[0]):
+                return vs[0] + join(cs[1:], vs[1:])
+
+            return cs[0] + join(cs[1:], vs)
+
+        return join(string, ''.join(filter(vowel, reversed(string))))
